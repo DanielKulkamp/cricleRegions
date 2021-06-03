@@ -83,7 +83,8 @@ const drawLines = (_graph) => {
 const generatePoints = (_graph, quantity) => {
     let angles = []
     for (i = 0; i<quantity; ++i){
-        angles.push(Math.random()*Math.PI*2)
+        angles.push(i*Math.PI*2/quantity)
+        //angles.push(Math.random()*Math.PI*2)
     }
    
     _graph.points = angles.map((val, index, arr)=> [
