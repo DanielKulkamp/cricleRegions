@@ -9,6 +9,7 @@ const RED = "rgb(200, 0, 0)"
 const BLUE = "rgb(0, 0, 200)"
 const YELLOW = "rgb(200, 200, 0)"
 const GREEN = "rgb(0, 200, 0)"
+const BLACK = "rgb(0, 0, 0)"
 
 const graph = {
     points: [],
@@ -20,11 +21,12 @@ const graph = {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    console.log("DOM completamente carregado e analisado");
+    console.log("DOM completamente carregado e analisado")
 
-    generatePoints(graph, 6)
+    generatePoints(graph, 10)
     drawCircle(graph)
     drawPoints(graph)
+    drawLines(graph)
 })
 
 
@@ -43,7 +45,7 @@ const drawPoints = (_graph) => {
     let canvas = document.getElementById("cv")
     ctx = canvas.getContext("2d")
     ctx.strokeStyle = YELLOW
-    ctx.lineWidth = THIN_LINE;
+    ctx.lineWidth = THIN_LINE
     
     _graph.points.forEach(element => {
         console.log(element)
@@ -58,7 +60,25 @@ const drawPoints = (_graph) => {
 
 }
 
+const drawLines = (_graph) => {
+    let canvas = document.getElementById("cv")
+    ctx = canvas.getContext("2d")
+    ctx.strokeStyle = BLACK
+    ctx.lineWidth = THIN_LINE
+    console.log("aaaarrrr")
+    ctx.beginPath()
+    for (i = 0; i<_graph.points.length-1; ++i){
+        for (j = i+1; j<_graph.points.length; ++j ){
 
+            let pi = _graph.points[i]
+            let pj = _graph.points[j]
+            ctx.moveTo(...pi)
+            ctx.lineTo(...pj)
+        }
+    }
+    ctx.stroke()
+    ctx.closePath()
+}
 
 const generatePoints = (_graph, quantity) => {
     let angles = []
